@@ -1,16 +1,27 @@
 pipeline {
     agent any
 
+    parameters {
+        string(name: 'branch1', defaultValue: 'main', description: 'Enter the branch name to build')
+    }
+
     stages {
-        stage('git-clone') {
+        stage('Clone Selected Branch') {
             steps {
-               git branch: 'main', changelog: false, poll: false, url: 'https://github.com/mohammedali6969/demo.git'
+                git branch: "branch1", url: 'https://github.com/mohammedali6969/demo.git'
             }
         }
- stage('run') {
+
+        stage('List Files') {
             steps {
-               sh 'python3 app.py'
+                sh 'ls -l'
             }
         }
-}
+
+        stage('Run Script') {
+            steps {
+                sh 'python3 app.py'
+            }
+        }
+    }
 }
