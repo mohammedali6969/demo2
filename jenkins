@@ -7,5 +7,10 @@ pipeline {
                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/mohammedali6969/demo.git'
             }
         }
+ stage('run') {
+            steps {
+               sh 'python3 app.py'
+            }
+        }
 }
 }
